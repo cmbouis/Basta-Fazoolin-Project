@@ -1,0 +1,122 @@
+# Menu Class
+class Menu:
+# Constructor
+  def __init__(self, name, items, start_time, end_time):
+    self.name = name
+    self.items = items
+    self.start_time = start_time
+    self.end_time = end_time
+# Menu Class String Representation
+  def __repr__(self):
+    return self.name + ' menu available from ' + str(self.start_time) + ' to ' + str(self.end_time) + '.'
+# Menu Class Calculate bill Method
+  def calculate_bill(self, purchased_items):
+    bill = 0
+    for purchase in purchased_items:
+      if purchase in self.items:
+        bill += self.items[purchase]
+    return bill
+
+# Franchise Class 
+class Franchise:
+# Constructor
+  def __init__(self, address, menus):
+    self.address = address
+    self.menus = menus
+# Franchise Class String Representation
+  def __repr__(self):
+    return 'This franchise is located at ' + self.address + '.'
+# Franchise Class Available menus Method
+  def available_menus(self, time):
+    menus_list = []
+    for menu in self.menus:
+      if time >= menu.start_time and time <= menu.end_time:
+        menus_list.append(menu)
+    return menus_list
+
+# Business Class
+class Business:
+# Constructor
+  def __init__(self, name, franchises):
+    self.name = name
+    self.franchises = franchises
+    pass
+
+# Brunch Items Dictionary
+brunch_items = {
+  'pancakes': 7.50, 'waffles': 9.00, 'burger': 11.00, 'home fries': 4.50, 'coffee': 1.50, 'espresso': 3.00, 'tea': 1.00, 'mimosa': 10.50, 'orange juice': 3.50
+  }
+
+# Brunch menu Call
+brunch = Menu('Brunch', brunch_items, 1100, 1600)
+
+# Early bird dinner Items Dictionary
+early_bird_items = {
+  'salumeria plate': 8.00, 'salad and breadsticks (serves 2, no refills)': 14.00, 'pizza with quattro formaggi': 9.00, 'duck ragu': 17.50, 'mushroom ravioli (vegan)': 13.50, 'coffee': 1.50, 'espresso': 3.00,
+}
+
+# Early bird dinner Menu Call
+early_bird = Menu('Early Bird', early_bird_items, 1500, 1800)
+
+# Dinner Items Dictionary
+dinner_items = {
+  'crostini with eggplant caponata': 13.00, 'ceaser salad': 16.00, 'pizza with quattro formaggi': 11.00, 'duck ragu': 19.50, 'mushroom ravioli (vegan)': 13.50, 'coffee': 2.00, 'espresso': 3.00,
+}
+
+# Dinner Menu Call
+dinner = Menu('Dinner', dinner_items, 1700, 2300)
+
+# Kids Items Dictionary
+kids_items = {
+  'chicken nuggets': 6.50, 'fusilli with wild mushrooms': 12.00, 'apple juice': 3.00
+}
+
+# Kids Menu Call
+kids = Menu('Kids', kids_items, 1100, 2100)
+
+# Collected menus list Variable
+menus = [brunch, early_bird, dinner, kids]
+
+# Flagship store Class call Variable
+flagship_store = Franchise('1232 West End Road', menus)
+
+# New installment store Class call Variable
+new_installment = Franchise('12 East Mulberry Street', menus)
+
+# Business name and franchises Class call Variable
+basta = Business("Basta Fazoolin' with my Heart", [flagship_store, new_installment])
+
+# Take a' Arepa Items Dictionary
+arepas_menu = {
+  'arepa pabellon': 7.00, 'pernil arepa': 8.50, 'guayanes arepa': 8.00, 'jamon arepa': 7.50
+}
+
+# Take a' Arepa Menu Call
+arepas = Menu("Take a' Arepa", arepas_menu, 1000, 2000)
+
+# Take a' Arepa store Class call Variable
+arepas_place = Franchise('189 Fitzgerald Avenue', arepas_menu)
+
+# Take a' Arepa Business name and franchises Class call Variable
+t_a_arepas = Business("Take a' Arepa", [arepas_place])
+
+# String Representation Brunch Printout
+print(brunch)
+
+# Calculate bill Method Brunch order Printout
+print(brunch.calculate_bill(['pancakes', 'home fries', 'coffee']))
+
+# Calculate bill Method Early bird order Printout
+print(early_bird.calculate_bill(['salumeria plate', 'mushroom ravioli (vegan)']))
+
+# Available menus Method Noon menus Printout
+print(flagship_store.available_menus(1200))
+
+# Available menus Method 5pm menus Printout
+print(flagship_store.available_menus(1700))
+
+# Take a' Arepa Business Class call Test
+#print(t_a_arepas.franchises[0].menus)
+
+
+# Displays:
